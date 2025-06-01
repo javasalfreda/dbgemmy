@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBGemmy - Generator Database Dummy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>DBGemmy - Generator Database Dummy 🤖</h1>
+    </header>
+
+    <main>
+        <section id="ai-assist">
+            <h2>✨ AI Assistant for Data Schemes & Context</h2>
+            <label for="ai-context">Describe your database context (e.g., "online bookstore", "warehouse inventory"):</label><br>
+            <textarea id="ai-context" rows="3" style="width: 90%;" placeholder="This context will help the AI provide schema suggestions and generate more relevant data."></textarea><br>
+            <button type="button" id="suggest-schema-btn">Get Schema Suggestions from AI</button>
+            <p id="ai-status" style="font-style: italic;"></p>
+        </section>
+
+        <section id="table-definitions">
+            <h2>Table Definition</h2>
+            <div id="tables-container">
+                </div>
+            <button type="button" id="add-table-btn">Add New Table</button>
+        </section>
+
+        <section id="generation-options">
+            <h2>Generate Options</h2>
+            <div>
+                <label for="num-rows">Rows per Table:</label>
+                <input type="number" id="num-rows" value="10" min="1">
+            </div>
+            <div class="format-options" style="margin-top: 10px;"> <label style="font-weight: bold;">Format Output:</label>
+                <label><input type="radio" name="outputFormat" value="csv" checked> CSV</label>
+                <label><input type="radio" name="outputFormat" value="excel"> Excel (.xlsx)</label>
+            </div>
+        </section>
+
+        <section id="actions">
+            <button type="button" id="generate-btn">Generate Data!</button>
+        </section>
+
+        <section id="results">
+            <h2>Result</h2>
+            <div id="download-links">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> DBGemmy by Javas Alfreda</p>
+    </footer>
+
+    <template id="table-template">
+        <div class="table-definition">
+            <input type="text" class="table-name" placeholder="Table Name">
+            <button type="button" class="remove-table-btn">Delete This Table</button>
+            <div class="columns-container">
+                </div>
+            <button type="button" class="add-column-btn">Add Column to This Table</button>
+        </div>
+    </template>
+
+    <template id="column-template">
+        <div class="column-definition">
+            <input type="text" class="column-name" placeholder="Column Name" style="width:150px;">
+            <select class="column-type" style="width:180px;"> <option value="string">String (Quick Random)</option>
+                <option value="ai_text">Text via AI (Contextual)</option> <option value="integer">Integer</option>
+                <option value="float">Float</option>
+                <option value="date">Date</option>
+                <option value="email">Email (Faker)</option>
+                <option value="fullname">Full Name (Faker)</option>
+                <option value="address">Address (Faker)</option>
+                <option value="uuid">UUID</option>
+                <option value="boolean">Boolean</option>
+                <option value="text">Long Text (Faker)</option>
+                <option value="custom_list">Custom</option>
+            </select>
+            <input type="text" class="column-options" placeholder="Opsi (cth: min_len=5,max_len=10)" style="width:200px;">
+            <label><input type="checkbox" class="column-unique"> Unique</label>
+            <label><input type="checkbox" class="column-nullable"> Nullable</label>
+            <input type="number" class="column-nullable-chance" min="0" max="100" value="10" title="Persentase Null (%)" style="width:60px; display:none;">
+            <button type="button" class="remove-column-btn">Delete Column</button>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Flask
+Flask-CORS
+pandas
+gunicorn
+Faker
+python-dotenv
+google-generativeai
+openpyxl

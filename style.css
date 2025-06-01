@@ -1,0 +1,437 @@
+/* Global Resets and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f2f5; /* Softer background */
+    color: #333;
+    margin: 0;
+    padding-bottom: 60px; /* Space for footer */
+    position: relative;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #1e90ff, #007bff); /* Gradient background */
+    color: #fff;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+/* Sections */
+section {
+    background-color: #fff;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    color: #0056b3; /* Darker blue for headings */
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef; /* Subtle separator */
+    font-size: 1.6em;
+}
+
+/* Form Elements */
+label {
+    display: inline-block; /* Allows margin-bottom */
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #495057;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    width: 100%; /* Default to full width */
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+textarea#ai-context {
+    width: 100%; /* Overrides inline style if any, ensures consistency */
+    min-height: 70px;
+    resize: vertical;
+}
+
+/* Buttons */
+button,
+input[type="button"] { /* General button styling */
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    margin-right: 8px;
+    margin-bottom: 8px; /* For wrapping */
+}
+
+button:hover,
+input[type="button"]:hover {
+    transform: translateY(-1px);
+}
+
+button:active,
+input[type="button"]:active {
+    transform: translateY(0px);
+}
+
+/* Primary Action Buttons */
+#suggest-schema-btn,
+#generate-btn {
+    background-color: #007bff; /* Primary blue */
+    color: white;
+}
+#suggest-schema-btn:hover,
+#generate-btn:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+
+/* Add Buttons */
+#add-table-btn,
+.add-column-btn {
+    background-color: #28a745; /* Green for add actions */
+    color: white;
+}
+#add-table-btn:hover,
+.add-column-btn:hover {
+    background-color: #1e7e34; /* Darker green */
+}
+
+/* Remove Buttons */
+.remove-table-btn,
+.remove-column-btn {
+    background-color: #dc3545; /* Red for remove/delete actions */
+    color: white;
+}
+.remove-table-btn:hover,
+.remove-column-btn:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+
+/* Table and Column Definitions */
+.table-definition {
+    border: 1px solid #dee2e6; /* Softer border */
+    background-color: #f8f9fa; /* Slightly off-white background */
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.table-definition .table-name {
+    width: calc(100% - 150px); /* Adjust width considering the remove button */
+    margin-right: 10px;
+    margin-bottom: 15px; /* Space before columns */
+    font-weight: bold;
+}
+
+.column-definition {
+    border: 1px solid #e9ecef; /* Lighter border for columns */
+    background-color: #fff;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex; /* For aligning items in a row and wrapping */
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px; /* Spacing between elements */
+}
+
+.column-definition > * {
+    margin-bottom: 0; /* Remove default bottom margin from inputs inside flex */
+}
+
+.column-definition input[type="text"],
+.column-definition select,
+.column-definition input[type="number"] {
+    flex-grow: 1; /* Allow inputs to grow */
+    min-width: 120px; /* Minimum width before wrapping */
+}
+
+.column-definition .column-name { width: 150px; flex-grow: 0;}
+.column-definition .column-type { width: 180px; flex-grow: 0;}
+.column-definition .column-options { width: 200px; flex-grow: 0;}
+.column-definition .column-nullable-chance { width: 70px; flex-grow: 0;}
+
+.column-definition label {
+    display: flex; /* Align checkbox and text */
+    align-items: center;
+    margin-right: 10px;
+    white-space: nowrap; /* Prevent label text from wrapping */
+}
+.column-definition input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: #007bff; /* Style checkbox color */
+}
+
+/* Specific Sections */
+#ai-status {
+    font-style: italic;
+    color: #6c757d; /* Muted color for status */
+    margin-top: 10px;
+    background-color: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block; /* Only take up needed space */
+}
+#ai-status:empty {
+    display: none; /* Hide if no status */
+}
+
+#generation-options .format-options label {
+    margin-right: 15px;
+    font-weight: normal;
+}
+#generation-options input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #007bff;
+}
+#generation-options input#num-rows {
+    width: 100px; /* Specific width for num-rows */
+}
+
+
+/* Results Section */
+#download-links a {
+    display: block;
+    margin-bottom: 8px;
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 12px;
+    background-color: #e9f5ff;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+#download-links a:hover {
+    background-color: #cce7ff;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40; /* Dark footer */
+    color: #f8f9fa;
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+/* Utility Classes (Optional) */
+.mt-1 { margin-top: 0.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.text-center { text-align: center; }
+
+/* Responsive adjustments (Basic) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .column-definition {
+        flex-direction: column; /* Stack column elements vertically on small screens */
+        align-items: stretch; /* Make them take full width */
+    }
+    .column-definition input[type="text"],
+    .column-definition select,
+    .column-definition input[type="number"],
+    .column-definition button {
+        width: 100% !important; /* Override fixed widths */
+        margin-right: 0;
+    }
+    .table-definition .table-name {
+        width: calc(100% - 130px); /* Adjust if button size changes or wraps */
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin: 10px auto;
+    }
+    section {
+        padding: 15px;
+    }
+    button, input[type="button"] {
+        width: 100%; /* Full-width buttons on very small screens */
+        margin-right: 0;
+    }
+    .table-definition .table-name {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .table-definition .remove-table-btn {
+        width: 100%;
+    }
+}
+.column-definition {
+    border: 1px solid #e9ecef;
+    background-color: #fff;
+    padding: 15px; /* Pertahankan padding */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px; /* Sedikit lebih besar dari sebelumnya */
+    display: flex;
+    flex-wrap: wrap;
+    /* GANTI align-items: center; MENJADI align-items: baseline; */
+    align-items: baseline; /* Kunci untuk mensejajarkan input berdasarkan teksnya */
+    gap: 12px; /* Sedikit perbesar gap untuk spasi */
+}
+
+/* Hapus margin-bottom default dari anak langsung, biarkan 'gap' yang mengatur */
+.column-definition > * {
+    margin-bottom: 0;
+}
+
+/* Styling umum untuk input dan select di dalam .column-definition */
+.column-definition input[type="text"],
+.column-definition input[type="number"],
+.column-definition select {
+    padding: 10px 12px; /* Pastikan padding konsisten untuk tinggi yang sama */
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 0.95em;
+    line-height: 1.5; /* Bantu konsistensi tinggi */
+    /* Hapus flex-grow: 1; dari aturan umum ini, kita akan spesifik */
+    /* min-width: 120px; bisa dipertahankan sebagai fallback jika ada input tanpa kelas khusus */
+}
+
+/* Pengaturan lebar dan fleksibilitas spesifik */
+.column-definition .column-name {
+    width: 150px;
+    flex-grow: 0; /* Jangan membesar */
+    flex-shrink: 0; /* Jangan mengecil dari lebar yang ditentukan */
+}
+
+.column-definition .column-type {
+    width: 180px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.column-definition .column-options {
+    min-width: 200px; /* Lebar minimum */
+    flex-grow: 1;     /* Izinkan untuk membesar mengisi ruang sisa */
+    flex-basis: 220px; /* Lebar dasar yang disarankan */
+}
+
+.column-definition .column-nullable-chance {
+    width: 75px; /* Sedikit lebih lebar untuk angka 100 */
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+/* Styling untuk label checkbox agar lebih rapi */
+.column-definition label {
+    display: flex;
+    align-items: center; /* Vertikal align checkbox dan teks label */
+    white-space: nowrap;
+    margin-right: 10px; /* Spasi antar label/checkbox */
+    padding-top: 5px; /* Tambahkan sedikit padding atas untuk alignment baseline yang lebih baik dengan input field */
+    padding-bottom: 5px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.column-definition input[type="checkbox"] {
+    margin-right: 6px;
+    /* accent-color: #007bff; sudah ada, bagus */
+    /* Checkbox biasanya kecil, jadi baseline alignment mungkin membuat labelnya tampak sedikit lebih rendah.
+       Padding pada label membantu menyeimbangkannya secara visual. */
+}
+
+/* Tombol Hapus Kolom di dalam .column-definition */
+.column-definition .remove-column-btn {
+    /* background-color: #dc3545; sudah ada */
+    /* color: white; sudah ada */
+    padding: 10px 15px; /* Sesuaikan padding jika perlu */
+    font-size: 0.9em; /* Mungkin sedikit lebih kecil jika terlalu dominan */
+    flex-grow: 0;
+    flex-shrink: 0;
+    /* Margin kiri auto bisa digunakan jika ingin tombol selalu di paling kanan pada barisnya,
+       tapi dengan flex-wrap, ini mungkin tidak selalu ideal jika tombol sendirian di baris baru.
+       Biarkan dulu tanpa margin-left: auto; */
+}
+
+
+/* ... (CSS Anda yang lain, termasuk media queries) ... */
+
+/* Pastikan media query untuk .column-definition juga diperiksa */
+@media (max-width: 768px) {
+    .column-definition {
+        flex-direction: column;
+        align-items: stretch; /* Ubah alignment untuk mode kolom */
+        gap: 10px; /* Sesuaikan gap untuk mode kolom jika perlu */
+    }
+
+    /* Pastikan semua elemen di .column-definition mengambil lebar penuh saat stacked */
+    .column-definition .column-name,
+    .column-definition .column-type,
+    .column-definition .column-options,
+    .column-definition .column-nullable-chance,
+    .column-definition label,
+    .column-definition .remove-column-btn {
+        width: 100% !important; /* Paksa lebar penuh */
+        margin-right: 0; /* Hapus margin jika ada */
+    }
+
+    .column-definition label {
+        padding-top: 0; /* Reset padding atas pada label jika tidak lagi align baseline */
+        padding-bottom: 0;
+        justify-content: flex-start; /* Pastikan checkbox dan teks label mulai dari kiri */
+    }
+}
